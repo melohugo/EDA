@@ -9,25 +9,28 @@
 #define swap(c1, c2) {int c = c1; c1 = c2; c2 = c;}
 #define MAIN main
 
-int grau(int n)
+void itoa(int n, int *str)
 {
-	int i;
-	for (i = 0; n != 0; i++, n /= 10)
-		;
+	for (;n > 0; str++, n /= 10)
+		*str = n % 10;
 
-	return i;
+	*str = '\0';
 }
 
-int rumo(int *str, int *grau_n) 
+int rumo(int *str, int grau) 
 {
-	int soma;
-	
-	for (soma = 0;*str != '\0'; str++)
+	int soma;	
+	int str_rec[10];
+
+	for (soma = 0;*str != '\0'; str++) 
 		soma += *str;
 	
-	*grau_n = grau(soma);
-
-	return soma % 9 == 0 ? 1 : 0;
+	if (soma > 10 && soma % 9 == 0) {
+		itoa(soma, str_rec);
+		rumo(str_rec, ++grau);	
+	}
+	else 
+		return soma % 9 == 0 ? grau : -1;
 }
 
 int leitura(int *str)
@@ -56,12 +59,10 @@ void mostra(int *str)
 int MAIN(void)
 {
 	int *str = malloc(sizeof(int)*10000);
-	int div;
 	int grau;
 
 	while (leitura(str) != 0) {
-		div = rumo(str, &grau);
-		if (div == 1) {
+		if ((grau = rumo(str, 1)), grau > 0) {
 			mostra(str);
 			printf(" is a multiple of 9 and has 9-degree %d.\n", grau);
 		}
