@@ -72,7 +72,7 @@ int MAIN(void)
 	int acao[1000];
 	crianca *fila, *aux;
 
-	teste = 0;
+	teste = 1;
 	while (scanf("%d %d", &P, &R), P != 0 && R != 0) {
 		le_n(ordem, P);	
 		fila = malloc(sizeof(crianca));
