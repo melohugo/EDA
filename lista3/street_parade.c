@@ -47,6 +47,7 @@ void operacao(int *str, int *p, int *ordem, int len)
 		}
 	}	
 	u--;
+	printf("[%d]\n", p[0]);
 	while (u >= 0 && j < len) 
 		ordem[j++] = p[u--];
 }
