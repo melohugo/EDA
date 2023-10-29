@@ -9,14 +9,6 @@
 #define swap(c1, c2) {int c = c1; c1 = c2; c2 = c;}
 #define MAIN main
 
-int em_ordem (int *v, int len)
-{
-	int i;
-	for (i = 0;i < len && v[i] < v[i + 1]; i++)	
-		;
-	return i == len - 1? 1 : 0;
-}
-
 void le_vetor(int *vet, int len)
 {
 	int c;
@@ -27,35 +19,10 @@ void le_vetor(int *vet, int len)
 	}
 }
 
-void operacao(int *str, int *p, int *ordem, int len)
-{
-	int u, j; 
-
-	u = j = 0;
-	p[u] = INT_MAX;
-	
-	for (int i = 0;i < len; i++) {
-		if (p[u - 1] < str[i] && u > 0) 
-			ordem[j++] = p[u--];
-		if (i + 1 == len)
-			ordem[j++] = str[i];
-		else {
-			if (str[i] < str[i + 1])
-				ordem[j++] = str[i];
-			else 
-				p[u++] = str[i];
-		}
-	}	
-	u--;
-	printf("[%d]\n", p[0]);
-	while (u >= 0 && j < len) 
-		ordem[j++] = p[u--];
-}
-
 int MAIN(void)
 {
 	int *str, *ordem, *p;
-	int n;
+	int n, c, i, u;
 
 
 	str = malloc(sizeof(int)*1001);
@@ -64,16 +31,27 @@ int MAIN(void)
 
 	while (scanf("%d", &n), n != 0) {
 		le_vetor(str, n);
-		if (n == 1)
-			printf("yes\n");
-		else {
-			operacao(str, p, ordem, n);
-		
-			if (em_ordem(ordem, n))
-				printf("yes\n");
+		i = u = 0;
+		c = 1;
+		while (i < n) {
+			while (u > 0 && p[u - 1] == c) {
+				c++;
+				u--;
+			}
+			if (str[i] == c) 
+				c++;
 			else 
-				printf("no\n");
+				p[u++] = str[i];
+			i++;
 		}
+		u--;
+		while (u > 0 && p[u] == c) {
+			c++;
+			u--;
+		}
+		if (n == 1)
+			c = 1;
+		printf("%s\n", c == n ? "yes" : "no");
 	}
 	return 0;
 }

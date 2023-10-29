@@ -19,19 +19,35 @@ celula *cabeca;
 void enfileira (celula **f, int x)
 {
 	celula *c;
-	celula *cabeca;
+	celula *primeiro;
 
 	c = malloc(sizeof(celula));
 	c->dado = x;
-	cabeca = (*f)->prox;
-	(*f)->prox = c;
-	c->prox = cabeca;
+
+	
+
+	if ((*f)->prox == NULL) {
+		(*f)->prox = c;
+		c->prox = c;
+	}
+	else {
+		primeiro = (*f)->prox;
+		(*f)->prox = c;
+		//c->prox = primeiro;
+		c->prox = &(*f)->prox;
+	}
+	printf("primeiro = %d ", primeiro->dado);
+	printf("f->dado = %d ", (*f)->dado);
+	printf("f->prox->dado = %d\n", (*f)->prox->dado);
 }
 
 int desenfileira (celula *f, int *y)
 {
-	if (f->prox == f)
+	if (f->prox == NULL)
 		return 0;
+	if (f->prox = f->prox->prox) {
+
+	}
 
 	celula *c;
 	
@@ -46,10 +62,15 @@ int desenfileira (celula *f, int *y)
 void cria_no(celula *lista,int x)
 {
 	celula *no = malloc(sizeof(celula));
-	celula *ultimo;
+	celula *cabeca;
 
-	while(lista->prox != cabeca) 
+	cabeca = lista;
+
+	while(lista->prox->prox != cabeca->prox) {
+		show(lista->dado)
+		entrou
 		lista = lista->prox;
+	}
 	
 	lista->prox = no;
 	no->dado = x;
@@ -58,12 +79,13 @@ void cria_no(celula *lista,int x)
 
 void mostra(celula *lista)
 {
-	if (lista->prox != cabeca) {
-		printf("%d -> ", lista->dado);
+	if (lista->prox->prox != cabeca->prox) {
+		printf("%d -> ", lista->prox->dado);
 		mostra(lista->prox);
 	}
 	else {
-		printf("cabeca\n");
+		printf("%d -> ", lista->prox->dado);
+		printf("primeiro\n");
 	}
 }
 
@@ -72,7 +94,7 @@ celula *calc_ultimo(celula *l)
 	celula *c;
 
 	c = l;
-	while(c->prox->prox != l) 
+	while(c->prox->prox != l->prox) 
 		c = c->prox;
 
 	return c;
@@ -84,7 +106,7 @@ int MAIN(void)
 	celula *l2 = malloc(sizeof(celula));
 	celula *ultimo;
 	celula **f;
-	l->prox = l;
+	l->prox = NULL;
 	l->dado = 0;
 	int vet[100] = {1,2,3,4};
 
@@ -96,14 +118,25 @@ int MAIN(void)
 	enfileira(&l, 15);
 
 	mostra(l);
+	/*
 	for (int i = 0; i <= 4; i++)
 		cria_no(l, vet[i]);
+		*/
 
+	celula **aux;
+	aux = &(l->prox);
+	for (int i = 1; i <= 4; i++) {
+		enfileira(aux, i);
+		aux = &((*aux)->prox);
+	}
+
+
+	entrou
 	ultimo = calc_ultimo(l);
 
 	mostra(l);
 	f = &ultimo;
-	enfileira(f, 54);
+	enfileira(aux, 54);
 	mostra(l);
 
 	show(desenfileira(l, &y))
