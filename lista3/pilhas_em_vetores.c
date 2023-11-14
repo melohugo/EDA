@@ -17,8 +17,8 @@ typedef struct {
 
 void empilha (pilha *p, int x)
 {
-	if (p->topo == p->N) {
-		p->v = realloc(p->v, sizeof(int) * p->N);
+	if (p->topo + 1== p->N) {
+		p->v = realloc(p->v, sizeof(int) * (2 * p->N));
 		p->N *= 2;
 	}
 
@@ -31,7 +31,7 @@ int desempilha (pilha *p, int *y)
 		return 0;
 	
 	p->topo--;
-	*y = p->v[p->topo--];
+	*y = p->v[p->topo];
 	return 1;
 }
 
