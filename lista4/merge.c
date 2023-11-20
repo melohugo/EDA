@@ -59,7 +59,7 @@ int MAIN(void)
 	for (len = 0; scanf("%d ", &vet[len]) != EOF; len++)
 		;
 
-	merge_sort(vet, 0, len);
+	merge_sort(vet, 0, len - 1);
 
 	for (int i = 0; i < len; i++) 
 		printf("%d%c", vet[i], i + 1 == n ? '\n' : ' ');

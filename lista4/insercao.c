@@ -11,17 +11,24 @@
 
 void insertion_sort(int *vet, int l, int r)
 {
-	for (int i = l; i < r; i++)
-		for (int j = i; j > l && vet[j] < vet[j - 1]; j--)
-			swap(vet[j], vet[j - 1])
+	int key, j;
+	for (int i = l + 1; i < r; i++) {
+		key = vet[i];
+
+		j = i - 1;
+		while (j >= l && vet[j] > key) {
+			vet[j + 1] = vet[j];	
+			j--;
+		}
+		vet[j + 1] = key;
+	}
 }
 
 int MAIN(void)
 {
-	int *vet;
+	int vet[50001];
 	int len;
 
-	vet = malloc(sizeof(int)*50001);
 	for (len = 0; scanf("%d ", &vet[len]) != EOF; len++)
 		;
 
