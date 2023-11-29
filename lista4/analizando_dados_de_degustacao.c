@@ -56,33 +56,32 @@ void merge_sort(dado *vet, int l, int r)
 
 int MAIN(void)
 {
-	char c, ant, i, posicao;
+	char info[100001];
+	int i, p;
 	dado *vet;
-
-	i = posicao = 0;
-	vet = malloc(sizeof(dado)*100001);
 	
-	c = getchar();
+	vet = malloc(sizeof(dado)*100001);
+	i = 0;
+	p = 0;
+	scanf("%s", info);
+	
+	
 	vet[i].tamanho = 1;
-	vet[i].caracter = c;
-	vet[i].inicio = posicao;
-	posicao = 1;	
-	ant = c;
-	while ((c = getchar()) != '\n') {
-		if (ant != c) {
+	vet[i].caracter = info[0];
+	vet[i].inicio = 0;
+	while (info[p++] != '\0') {
+		if (info[p - 1] != info[p]) {
 			i++;
 			vet[i].tamanho = 1;
-			vet[i].caracter = c;
-			vet[i].inicio = posicao;
+			vet[i].caracter = info[p];
+			vet[i].inicio = p;
 		}
 		else
 			vet[i].tamanho += 1;
-		posicao++;
-		ant = c;
 	}
-	merge_sort(vet, 0, i);
+	merge_sort(vet, 0, i - 1);
 
-	for (int j = 0; j <= i; j++) 
+	for (int j = 0; j < i; j++) 
 		printf("%d %c %d\n", vet[j].tamanho, vet[j].caracter, vet[j].inicio);
 
 	return 0;

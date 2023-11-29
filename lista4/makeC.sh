@@ -1,1 +1,1 @@
-/home/hugoq/scripts/makeC.sh
+/home/hugo/Documents/scripts/makeC.sh
