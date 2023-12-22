@@ -1,4 +1,4 @@
-typedef Item int
+typedef int Item;
 
 typedef struct no {
 	Item info;
