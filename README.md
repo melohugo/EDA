@@ -1,3 +1,3 @@
-# EDA (estrutura de dados e algoritimos)
+# EDA (estrutura de dados e algoritmos)
 
 2023/2
