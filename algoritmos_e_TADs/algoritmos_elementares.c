@@ -1,12 +1,17 @@
-void bubble_sort(int *v, int l, int r)
+typedef int Item;
+#define Key(A) (A)
+#define less(A,B) (Key(A) < Key(B))
+#define exch(A,B) {Item t = A; A=B; B=t}
+#define cmpexch(A,B) {if(less(A,B)) exch(A,B);}
+
+void bubble_sort(Item *v, int l, int r)
 {
 	for ( ; r > l; r--)
 		for (int i = l; j < r; i++)
-			if (v[i] > v[i + 1])
-				swap(v[i], v[i + 1])
+			cmpexc(v[i], v[i + 1]);
 }
 
-void selection_sort(int *v, int l, int r)
+void selection_sort(Item *v, int l, int r)
 {
 	int menor;
 
@@ -14,18 +19,19 @@ void selection_sort(int *v, int l, int r)
 		menor = i;
 
 		for (int j = i + 1; j <= r; j++){
-			if (v[j] < v[menor])
+			if (less(v[j], v[menor]))
 				menor = j;
 
 			if (i != menor)
-				swap(v[i], v[menor])
+				exch(v[i], v[menor])
 		}
 	}
 }
 
-void insertion_sort(int *vet, int l, int r)
+void insertion_sort(Item *vet, int l, int r)
 {
-	int key, j;
+	Item key;
+     	int j;
 	for (int i = l + 1; i < r; i++) {
 		key = vet[i];
 
