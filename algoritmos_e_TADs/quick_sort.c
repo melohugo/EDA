@@ -11,9 +11,9 @@ int partition (Item *v, int l, int r)
 	Item pivot = v[r];
 
 	while (i < j) {
-		while (v[++i] < pivot)
+		while (Key(v[++i]) < Key(pivot))
 			;
-		while (v[--j] >= pivot && j > l)
+		while (Key(v[--j]) >= Key(pivot) && j > l)
 			;
 		if (i < j)
 			exch(v[i], v[j]);

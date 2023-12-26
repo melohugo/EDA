@@ -1,7 +1,7 @@
 typedef int Item;
 #define Key(A) (A)
 #define less(A,B) (Key(A) < Key(B))
-#define exch(A,B) {Item t = A; A=B; B=t}
+#define exch(A,B) {Item t = A; A=B; B=t;}
 #define cmpexch(A,B) {if(less(A,B)) exch(A,B);}
 
 void bubble_sort(Item *v, int l, int r)
